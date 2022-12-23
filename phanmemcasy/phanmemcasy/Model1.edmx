@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PHANMEMTRACUUNHACSY_CASYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAIHAT">
+          <Key>
+            <PropertyRef Name="MABAIHAT" />
+          </Key>
+          <Property Name="MABAIHAT" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENBAIHAT" Type="nvarchar" MaxLength="50" />
+          <Property Name="GIAIDIEU" Type="nvarchar" MaxLength="10" />
+          <Property Name="MATHELOAI" Type="char" MaxLength="10" />
+          <Property Name="MANHACSY" Type="char" MaxLength="10" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BANNHAC">
+          <Key>
+            <PropertyRef Name="MABANNHAC" />
+          </Key>
+          <Property Name="MABANNHAC" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENBANNHAC" Type="nvarchar" MaxLength="20" />
+          <Property Name="SODTLIENHE" Type="char" MaxLength="20" />
+          <Property Name="MATRUONGNHOM" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CASY">
+          <Key>
+            <PropertyRef Name="MACASY" />
+          </Key>
+          <Property Name="MACASY" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENCASY" Type="nvarchar" MaxLength="20" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="20" />
+          <Property Name="SODIENTHOAI" Type="char" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="NHACCONG">
+          <Key>
+            <PropertyRef Name="MANHACCONG" />
+          </Key>
+          <Property Name="MANHACCONG" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENNHACCONG" Type="nvarchar" MaxLength="20" />
+          <Property Name="NHACCUSUDUNG" Type="nvarchar" MaxLength="20" />
+          <Property Name="MABANNHAC" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NHACSY">
+          <Key>
+            <PropertyRef Name="MANHACSY" />
+          </Key>
+          <Property Name="MANHACSY" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENNHACSY" Type="nvarchar" MaxLength="20" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="20" />
+          <Property Name="SODIENTHOAI" Type="char" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="THELOAI">
+          <Key>
+            <PropertyRef Name="MATHELOAI" />
+          </Key>
+          <Property Name="MATHELOAI" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TENTHELOAI" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="THUCHIEN">
+          <Key>
+            <PropertyRef Name="MATHUCHIEN" />
+          </Key>
+          <Property Name="MATHUCHIEN" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="MACASY" Type="char" MaxLength="10" />
+          <Property Name="MABAIHAT" Type="char" MaxLength="10" />
+          <Property Name="MABANNHAC" Type="char" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_BAIHAT_MANHACSY">
+          <End Role="NHACSY" Type="Self.NHACSY" Multiplicity="0..1" />
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHACSY">
+              <PropertyRef Name="MANHACSY" />
+            </Principal>
+            <Dependent Role="BAIHAT">
+              <PropertyRef Name="MANHACSY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIHAT_MATHELOAI">
+          <End Role="THELOAI" Type="Self.THELOAI" Multiplicity="0..1" />
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THELOAI">
+              <PropertyRef Name="MATHELOAI" />
+            </Principal>
+            <Dependent Role="BAIHAT">
+              <PropertyRef Name="MATHELOAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHACCONG_MABANNHAC">
+          <End Role="BANNHAC" Type="Self.BANNHAC" Multiplicity="0..1" />
+          <End Role="NHACCONG" Type="Self.NHACCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANNHAC">
+              <PropertyRef Name="MABANNHAC" />
+            </Principal>
+            <Dependent Role="NHACCONG">
+              <PropertyRef Name="MABANNHAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MABAIHAT">
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIHAT">
+              <PropertyRef Name="MABAIHAT" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MABAIHAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MABANNHAC">
+          <End Role="BANNHAC" Type="Self.BANNHAC" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANNHAC">
+              <PropertyRef Name="MABANNHAC" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MABANNHAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MACASY">
+          <End Role="CASY" Type="Self.CASY" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CASY">
+              <PropertyRef Name="MACASY" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MACASY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="PHANMEMTRACUUNHACSY_CASYModelStoreContainer">
+          <EntitySet Name="BAIHAT" EntityType="Self.BAIHAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BANNHAC" EntityType="Self.BANNHAC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CASY" EntityType="Self.CASY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHACCONG" EntityType="Self.NHACCONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHACSY" EntityType="Self.NHACSY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THELOAI" EntityType="Self.THELOAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THUCHIEN" EntityType="Self.THUCHIEN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BAIHAT_MANHACSY" Association="Self.FK_BAIHAT_MANHACSY">
+            <End Role="NHACSY" EntitySet="NHACSY" />
+            <End Role="BAIHAT" EntitySet="BAIHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIHAT_MATHELOAI" Association="Self.FK_BAIHAT_MATHELOAI">
+            <End Role="THELOAI" EntitySet="THELOAI" />
+            <End Role="BAIHAT" EntitySet="BAIHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHACCONG_MABANNHAC" Association="Self.FK_NHACCONG_MABANNHAC">
+            <End Role="BANNHAC" EntitySet="BANNHAC" />
+            <End Role="NHACCONG" EntitySet="NHACCONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MABAIHAT" Association="Self.FK_THUCHIEN_MABAIHAT">
+            <End Role="BAIHAT" EntitySet="BAIHAT" />
+            <End Role="THUCHIEN" EntitySet="THUCHIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MABANNHAC" Association="Self.FK_THUCHIEN_MABANNHAC">
+            <End Role="BANNHAC" EntitySet="BANNHAC" />
+            <End Role="THUCHIEN" EntitySet="THUCHIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MACASY" Association="Self.FK_THUCHIEN_MACASY">
+            <End Role="CASY" EntitySet="CASY" />
+            <End Role="THUCHIEN" EntitySet="THUCHIEN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PHANMEMTRACUUNHACSY_CASYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BAIHAT">
+          <Key>
+            <PropertyRef Name="MABAIHAT" />
+          </Key>
+          <Property Name="MABAIHAT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENBAIHAT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GIAIDIEU" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MATHELOAI" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MANHACSY" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NHACSY" Relationship="Self.FK_BAIHAT_MANHACSY" FromRole="BAIHAT" ToRole="NHACSY" />
+          <NavigationProperty Name="THELOAI" Relationship="Self.FK_BAIHAT_MATHELOAI" FromRole="BAIHAT" ToRole="THELOAI" />
+          <NavigationProperty Name="THUCHIENs" Relationship="Self.FK_THUCHIEN_MABAIHAT" FromRole="BAIHAT" ToRole="THUCHIEN" />
+        </EntityType>
+        <EntityType Name="BANNHAC">
+          <Key>
+            <PropertyRef Name="MABANNHAC" />
+          </Key>
+          <Property Name="MABANNHAC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENBANNHAC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SODTLIENHE" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="MATRUONGNHOM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="NHACCONGs" Relationship="Self.FK_NHACCONG_MABANNHAC" FromRole="BANNHAC" ToRole="NHACCONG" />
+          <NavigationProperty Name="THUCHIENs" Relationship="Self.FK_THUCHIEN_MABANNHAC" FromRole="BANNHAC" ToRole="THUCHIEN" />
+        </EntityType>
+        <EntityType Name="CASY">
+          <Key>
+            <PropertyRef Name="MACASY" />
+          </Key>
+          <Property Name="MACASY" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENCASY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SODIENTHOAI" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="THUCHIENs" Relationship="Self.FK_THUCHIEN_MACASY" FromRole="CASY" ToRole="THUCHIEN" />
+        </EntityType>
+        <EntityType Name="NHACCONG">
+          <Key>
+            <PropertyRef Name="MANHACCONG" />
+          </Key>
+          <Property Name="MANHACCONG" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENNHACCONG" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NHACCUSUDUNG" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MABANNHAC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BANNHAC" Relationship="Self.FK_NHACCONG_MABANNHAC" FromRole="NHACCONG" ToRole="BANNHAC" />
+        </EntityType>
+        <EntityType Name="NHACSY">
+          <Key>
+            <PropertyRef Name="MANHACSY" />
+          </Key>
+          <Property Name="MANHACSY" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENNHACSY" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SODIENTHOAI" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BAIHATs" Relationship="Self.FK_BAIHAT_MANHACSY" FromRole="NHACSY" ToRole="BAIHAT" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="THELOAI">
+          <Key>
+            <PropertyRef Name="MATHELOAI" />
+          </Key>
+          <Property Name="MATHELOAI" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TENTHELOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BAIHATs" Relationship="Self.FK_BAIHAT_MATHELOAI" FromRole="THELOAI" ToRole="BAIHAT" />
+        </EntityType>
+        <EntityType Name="THUCHIEN">
+          <Key>
+            <PropertyRef Name="MATHUCHIEN" />
+          </Key>
+          <Property Name="MATHUCHIEN" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MACASY" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MABAIHAT" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="MABANNHAC" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BAIHAT" Relationship="Self.FK_THUCHIEN_MABAIHAT" FromRole="THUCHIEN" ToRole="BAIHAT" />
+          <NavigationProperty Name="BANNHAC" Relationship="Self.FK_THUCHIEN_MABANNHAC" FromRole="THUCHIEN" ToRole="BANNHAC" />
+          <NavigationProperty Name="CASY" Relationship="Self.FK_THUCHIEN_MACASY" FromRole="THUCHIEN" ToRole="CASY" />
+        </EntityType>
+        <Association Name="FK_BAIHAT_MANHACSY">
+          <End Role="NHACSY" Type="Self.NHACSY" Multiplicity="0..1" />
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHACSY">
+              <PropertyRef Name="MANHACSY" />
+            </Principal>
+            <Dependent Role="BAIHAT">
+              <PropertyRef Name="MANHACSY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BAIHAT_MATHELOAI">
+          <End Role="THELOAI" Type="Self.THELOAI" Multiplicity="0..1" />
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="THELOAI">
+              <PropertyRef Name="MATHELOAI" />
+            </Principal>
+            <Dependent Role="BAIHAT">
+              <PropertyRef Name="MATHELOAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MABAIHAT">
+          <End Role="BAIHAT" Type="Self.BAIHAT" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAIHAT">
+              <PropertyRef Name="MABAIHAT" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MABAIHAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHACCONG_MABANNHAC">
+          <End Role="BANNHAC" Type="Self.BANNHAC" Multiplicity="0..1" />
+          <End Role="NHACCONG" Type="Self.NHACCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANNHAC">
+              <PropertyRef Name="MABANNHAC" />
+            </Principal>
+            <Dependent Role="NHACCONG">
+              <PropertyRef Name="MABANNHAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MABANNHAC">
+          <End Role="BANNHAC" Type="Self.BANNHAC" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANNHAC">
+              <PropertyRef Name="MABANNHAC" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MABANNHAC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THUCHIEN_MACASY">
+          <End Role="CASY" Type="Self.CASY" Multiplicity="0..1" />
+          <End Role="THUCHIEN" Type="Self.THUCHIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CASY">
+              <PropertyRef Name="MACASY" />
+            </Principal>
+            <Dependent Role="THUCHIEN">
+              <PropertyRef Name="MACASY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PHANMEMTRACUUNHACSY_CASYEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAIHATs" EntityType="Self.BAIHAT" />
+          <EntitySet Name="BANNHACs" EntityType="Self.BANNHAC" />
+          <EntitySet Name="CASies" EntityType="Self.CASY" />
+          <EntitySet Name="NHACCONGs" EntityType="Self.NHACCONG" />
+          <EntitySet Name="NHACSies" EntityType="Self.NHACSY" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="THELOAIs" EntityType="Self.THELOAI" />
+          <EntitySet Name="THUCHIENs" EntityType="Self.THUCHIEN" />
+          <AssociationSet Name="FK_BAIHAT_MANHACSY" Association="Self.FK_BAIHAT_MANHACSY">
+            <End Role="NHACSY" EntitySet="NHACSies" />
+            <End Role="BAIHAT" EntitySet="BAIHATs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BAIHAT_MATHELOAI" Association="Self.FK_BAIHAT_MATHELOAI">
+            <End Role="THELOAI" EntitySet="THELOAIs" />
+            <End Role="BAIHAT" EntitySet="BAIHATs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MABAIHAT" Association="Self.FK_THUCHIEN_MABAIHAT">
+            <End Role="BAIHAT" EntitySet="BAIHATs" />
+            <End Role="THUCHIEN" EntitySet="THUCHIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHACCONG_MABANNHAC" Association="Self.FK_NHACCONG_MABANNHAC">
+            <End Role="BANNHAC" EntitySet="BANNHACs" />
+            <End Role="NHACCONG" EntitySet="NHACCONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MABANNHAC" Association="Self.FK_THUCHIEN_MABANNHAC">
+            <End Role="BANNHAC" EntitySet="BANNHACs" />
+            <End Role="THUCHIEN" EntitySet="THUCHIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THUCHIEN_MACASY" Association="Self.FK_THUCHIEN_MACASY">
+            <End Role="CASY" EntitySet="CASies" />
+            <End Role="THUCHIEN" EntitySet="THUCHIENs" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PHANMEMTRACUUNHACSY_CASYModelStoreContainer" CdmEntityContainer="PHANMEMTRACUUNHACSY_CASYEntities">
+          <EntitySetMapping Name="BAIHATs">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.BAIHAT">
+              <MappingFragment StoreEntitySet="BAIHAT">
+                <ScalarProperty Name="MABAIHAT" ColumnName="MABAIHAT" />
+                <ScalarProperty Name="TENBAIHAT" ColumnName="TENBAIHAT" />
+                <ScalarProperty Name="GIAIDIEU" ColumnName="GIAIDIEU" />
+                <ScalarProperty Name="MATHELOAI" ColumnName="MATHELOAI" />
+                <ScalarProperty Name="MANHACSY" ColumnName="MANHACSY" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BANNHACs">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.BANNHAC">
+              <MappingFragment StoreEntitySet="BANNHAC">
+                <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+                <ScalarProperty Name="TENBANNHAC" ColumnName="TENBANNHAC" />
+                <ScalarProperty Name="SODTLIENHE" ColumnName="SODTLIENHE" />
+                <ScalarProperty Name="MATRUONGNHOM" ColumnName="MATRUONGNHOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CASies">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.CASY">
+              <MappingFragment StoreEntitySet="CASY">
+                <ScalarProperty Name="MACASY" ColumnName="MACASY" />
+                <ScalarProperty Name="TENCASY" ColumnName="TENCASY" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="SODIENTHOAI" ColumnName="SODIENTHOAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHACCONGs">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.NHACCONG">
+              <MappingFragment StoreEntitySet="NHACCONG">
+                <ScalarProperty Name="MANHACCONG" ColumnName="MANHACCONG" />
+                <ScalarProperty Name="TENNHACCONG" ColumnName="TENNHACCONG" />
+                <ScalarProperty Name="NHACCUSUDUNG" ColumnName="NHACCUSUDUNG" />
+                <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHACSies">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.NHACSY">
+              <MappingFragment StoreEntitySet="NHACSY">
+                <ScalarProperty Name="MANHACSY" ColumnName="MANHACSY" />
+                <ScalarProperty Name="TENNHACSY" ColumnName="TENNHACSY" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="SODIENTHOAI" ColumnName="SODIENTHOAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THELOAIs">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.THELOAI">
+              <MappingFragment StoreEntitySet="THELOAI">
+                <ScalarProperty Name="MATHELOAI" ColumnName="MATHELOAI" />
+                <ScalarProperty Name="TENTHELOAI" ColumnName="TENTHELOAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THUCHIENs">
+            <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.THUCHIEN">
+              <MappingFragment StoreEntitySet="THUCHIEN">
+                <ScalarProperty Name="MATHUCHIEN" ColumnName="MATHUCHIEN" />
+                <ScalarProperty Name="MACASY" ColumnName="MACASY" />
+                <ScalarProperty Name="MABAIHAT" ColumnName="MABAIHAT" />
+                <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

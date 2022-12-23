@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PHANMEMTRACUUNHACSY_CASYModelStoreContainer" CdmEntityContainer="PHANMEMTRACUUNHACSY_CASYEntities">
+    <EntitySetMapping Name="BAIHATs">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.BAIHAT">
+        <MappingFragment StoreEntitySet="BAIHAT">
+          <ScalarProperty Name="MABAIHAT" ColumnName="MABAIHAT" />
+          <ScalarProperty Name="TENBAIHAT" ColumnName="TENBAIHAT" />
+          <ScalarProperty Name="GIAIDIEU" ColumnName="GIAIDIEU" />
+          <ScalarProperty Name="MATHELOAI" ColumnName="MATHELOAI" />
+          <ScalarProperty Name="MANHACSY" ColumnName="MANHACSY" />
+          <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BANNHACs">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.BANNHAC">
+        <MappingFragment StoreEntitySet="BANNHAC">
+          <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+          <ScalarProperty Name="TENBANNHAC" ColumnName="TENBANNHAC" />
+          <ScalarProperty Name="SODTLIENHE" ColumnName="SODTLIENHE" />
+          <ScalarProperty Name="MATRUONGNHOM" ColumnName="MATRUONGNHOM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CASies">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.CASY">
+        <MappingFragment StoreEntitySet="CASY">
+          <ScalarProperty Name="MACASY" ColumnName="MACASY" />
+          <ScalarProperty Name="TENCASY" ColumnName="TENCASY" />
+          <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+          <ScalarProperty Name="SODIENTHOAI" ColumnName="SODIENTHOAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NHACCONGs">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.NHACCONG">
+        <MappingFragment StoreEntitySet="NHACCONG">
+          <ScalarProperty Name="MANHACCONG" ColumnName="MANHACCONG" />
+          <ScalarProperty Name="TENNHACCONG" ColumnName="TENNHACCONG" />
+          <ScalarProperty Name="NHACCUSUDUNG" ColumnName="NHACCUSUDUNG" />
+          <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NHACSies">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.NHACSY">
+        <MappingFragment StoreEntitySet="NHACSY">
+          <ScalarProperty Name="MANHACSY" ColumnName="MANHACSY" />
+          <ScalarProperty Name="TENNHACSY" ColumnName="TENNHACSY" />
+          <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+          <ScalarProperty Name="SODIENTHOAI" ColumnName="SODIENTHOAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THELOAIs">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.THELOAI">
+        <MappingFragment StoreEntitySet="THELOAI">
+          <ScalarProperty Name="MATHELOAI" ColumnName="MATHELOAI" />
+          <ScalarProperty Name="TENTHELOAI" ColumnName="TENTHELOAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="THUCHIENs">
+      <EntityTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.THUCHIEN">
+        <MappingFragment StoreEntitySet="THUCHIEN">
+          <ScalarProperty Name="MATHUCHIEN" ColumnName="MATHUCHIEN" />
+          <ScalarProperty Name="MACASY" ColumnName="MACASY" />
+          <ScalarProperty Name="MABAIHAT" ColumnName="MABAIHAT" />
+          <ScalarProperty Name="MABANNHAC" ColumnName="MABANNHAC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PHANMEMTRACUUNHACSY_CASYModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PHANMEMTRACUUNHACSY_CASYModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>
